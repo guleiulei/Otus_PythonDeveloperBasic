@@ -19,6 +19,7 @@ ODD = "odd"
 EVEN = "even"
 PRIME = "prime"
 
+
 def is_prime(x):
     count = 0
     for i in range(2, x//2 +1):

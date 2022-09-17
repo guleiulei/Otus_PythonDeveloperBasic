@@ -24,7 +24,7 @@ def is_prime(x):
     count = 0
     for i in range(2, x//2 +1):
         if x % i == 0:
-            ount += 1 
+            count += 1 
     if count <= 0 and x > 1: # исключаю 1 т.к. не является простым числом 
         return x 
 

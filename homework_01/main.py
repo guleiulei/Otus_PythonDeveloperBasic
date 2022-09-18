@@ -11,7 +11,7 @@ def power_numbers(*args):
     >>> power_numbers(1, 2, 5, 7)
     <<< [1, 4, 25, 49]
     """
-    return [num ** num for num in args]
+    return [num * num for num in args]
 
 
 # filter types
@@ -45,5 +45,4 @@ def filter_numbers(*args):
         return list(filter(is_prime, args[0]))
 
 
-print(filter_numbers([0,1,2,3,4,5,6,7,8,9,10,11], PRIME))
-
+print(power_numbers(1, 2, 5, 7))

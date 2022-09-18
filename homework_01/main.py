@@ -11,7 +11,7 @@ def power_numbers(*args):
     >>> power_numbers(1, 2, 5, 7)
     <<< [1, 4, 25, 49]
     """
-    return [num ** num for num in args]
+    return [num * num for num in args]
 
 
 # filter types
@@ -19,13 +19,10 @@ ODD = "odd"
 EVEN = "even"
 PRIME = "prime"
 
+
 def is_prime(x):
-    count = 0
-    for i in range(2, x//2 +1):
-        if x % i == 0:
-            ount += 1 
-    if count <= 0 and x > 1: # исключаю 1 т.к. не является простым числом 
-        return x 
+    if x > 1 and all(x % i for i in range(2, x)): # 1 не является простым числом
+        return x
 
 
 def filter_numbers(*args):
@@ -46,3 +43,6 @@ def filter_numbers(*args):
         return list(filter(lambda num: num % 2 == 0, args[0]))
     elif args[-1] == 'prime':
         return list(filter(is_prime, args[0]))
+
+
+print(power_numbers(1, 2, 5, 7))

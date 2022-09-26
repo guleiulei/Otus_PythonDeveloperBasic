@@ -25,7 +25,7 @@ def is_prime(x):
         return x
 
 
-def filter_numbers(*args):
+def filter_numbers(nums, filter_type):
     """
     функция, которая на вход принимает список из целых чисел,
     и возвращает только чётные/нечётные/простые числа
@@ -37,12 +37,9 @@ def filter_numbers(*args):
     <<< [2, 4]
     """
             
-    if args[-1] == 'odd':
-        return list(filter(lambda num: num % 2 != 0, args[0]))
-    elif args[-1] == 'even':
-        return list(filter(lambda num: num % 2 == 0, args[0]))
-    elif args[-1] == 'prime':
-        return list(filter(is_prime, args[0]))
-
-
-print(power_numbers(1, 2, 5, 7))
+    if filter_type == ODD:
+        return list(filter(lambda num: num % 2 != 0, nums))
+    elif filter_type == EVEN:
+        return list(filter(lambda num: num % 2 == 0, nums))
+    elif filter_type == PRIME:
+        return list(filter(is_prime, nums))

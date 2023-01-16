@@ -1,6 +1,6 @@
 import asyncio
 from typing import List
-from models.base import Base
+from models.base import Base, Session
 from homework_04.jsonplaceholder_request import async_engine, get_users, get_posts
 from homework_04.models import User, Post
 
@@ -32,6 +32,10 @@ async def add_users():
         fetch_users(),
         fetch_posts(),
     )
+
+    async with Session() as session:
+        async with session.begin():
+            session.ass_all(users + posts)
 
 
 async def async_main():

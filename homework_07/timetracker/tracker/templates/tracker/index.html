@@ -1,0 +1,10 @@
+{% extends 'root.html' %}
+
+{% block content %}
+<h1> Track your time! </h1>
+<ul>
+    {% for el in task %}
+        <li>{{ el.task_name }} - {{el.hours}} ({{el.epic.epic_name}})</li>
+    {% endfor %}
+</ul>
+{% endblock %}

@@ -22,8 +22,9 @@ async def fetch_users() -> List[User]:
 async def fetch_posts() -> List[Post]:
     posts = []
     for post in await get_posts():
-        post_ = Post(id=post['id'], user_id=post['user_id'], title=post['title'], body=post['body'])
-        posts.append(post_)
+        if 'user_id' in post:
+            post_ = Post(id=post['id'], user_id=post['user_id'], title=post['title'], body=post['body'])
+            posts.append(post_)
     return posts
 
 

@@ -33,10 +33,9 @@ async def add_users():
         fetch_users(),
         fetch_posts(),
     )
-
-async with Session() as session:
-    async with session.begin():
-        session.add_all(users + posts)
+    async with Session() as session:
+        async with session.begin():
+            session.add_all(users + posts)
 
 
 async def async_main():

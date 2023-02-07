@@ -12,30 +12,30 @@ async def create_tables():
 
 
 async def fetch_users() -> List[User]:
-    users = []
+    users_data = []
     for user in await get_users():
         user_ = User(id=user['id'], name=user['name'], username=user['username'], email=user['email'])
-        users.append(user_)
-    return users
+        users_data.append(user_)
+    return users_data
 
 
 async def fetch_posts() -> List[Post]:
-    posts = []
+    posts_data = []
     for post in await get_posts():
         if 'user_id' in post:
             post_ = Post(id=post['id'], user_id=post['user_id'], title=post['title'], body=post['body'])
-            posts.append(post_)
-    return posts
+            posts_data.append(post_)
+    return posts_data
 
 
 async def add_users():
-    users, posts = await asyncio.gather(
+    users_data, posts_data = await asyncio.gather(
         fetch_users(),
         fetch_posts(),
     )
     async with Session() as session:
         async with session.begin():
-            session.add_all(users + posts)
+            session.add_all(users_data + posts_data)
 
 
 async def async_main():

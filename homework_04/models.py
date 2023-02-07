@@ -23,7 +23,7 @@ class Base:
     def __tablename__(cls):
         return f"{cls.__name__.lower()}s"
 
-    id = Column(Integer, unique=True, primary_key=True)
+    id = Column(Integer, primary_key=True)
 
 
 class User(Base):
@@ -35,9 +35,9 @@ class User(Base):
 
 
 class Post(Base):
-    user_id = Column(Integer, ForeignKey('users.id'), nullable=False)
     title = Column(String, nullable=False)
     body = Column(Text, nullable=False)
+    user_id = Column(Integer, ForeignKey(User.id), nullable=False)
 
     user = relationship('User', back_populates='posts', uselist=False)
 

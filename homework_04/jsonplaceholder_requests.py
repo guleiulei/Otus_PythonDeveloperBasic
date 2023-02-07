@@ -1,6 +1,5 @@
 from aiohttp import ClientSession
 
-
 USERS_DATA_URL = "https://jsonplaceholder.typicode.com/users"
 POSTS_DATA_URL = "https://jsonplaceholder.typicode.com/posts"
 
@@ -16,7 +15,7 @@ async def get_users():
 
 
 async def get_posts():
-    async with ClientSession() as session:
+    async with aiohttp.ClientSession() as session:
         async with session.get(POSTS_DATA_URL) as response:
             print("Status:", response.status)
             print("Content-type:", response.headers['content-type'])

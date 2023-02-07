@@ -5,7 +5,6 @@ from sqlalchemy import Column, Integer, ForeignKey, String, Text
 
 PG_CONN_URI = os.environ.get("SQLALCHEMY_PG_CONN_URI") or "postgresql+asyncpg://postgres:password@localhost/postgres"
 
-
 async_engine: AsyncEngine = create_async_engine(
     url=PG_CONN_URI,
     echo=False,
@@ -25,6 +24,9 @@ class Base:
 
     id = Column(Integer, primary_key=True)
 
+    def __repr__(self):
+        return str(self)
+
 
 class User(Base):
     name = Column(String, nullable=False)
@@ -32,6 +34,9 @@ class User(Base):
     email = Column(String, nullable=False)
 
     posts = relationship('Post', back_populates='user', uselist=True)
+
+    def __str__(self):
+        return f"User(id={self.id}, username={self.username!r})"
 
 
 class Post(Base):
@@ -41,10 +46,12 @@ class Post(Base):
 
     user = relationship('User', back_populates='posts', uselist=False)
 
+    def __str__(self):
+        return f"Post(id={self.id}, title={self.title!r}, body={self.body})"
+
 
 Base = declarative_base(bind=async_engine, cls=Base)
 Session = sessionmaker(async_engine, class_=AsyncSession, expire_on_commit=False)
 
-
-def base():
-    return None
+# def base():
+#    return None

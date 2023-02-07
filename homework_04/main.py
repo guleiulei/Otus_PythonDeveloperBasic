@@ -1,6 +1,6 @@
 import asyncio
 from typing import List
-from homework_04.jsonplaceholder_request import async_engine, get_users, get_posts
+from homework_04.jsonplaceholder_requests import async_engine, get_users, get_posts
 from homework_04.models import User, Post, Base, Session
 
 

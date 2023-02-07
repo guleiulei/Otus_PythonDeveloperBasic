@@ -1,8 +1,8 @@
 import asyncio
-from typing import List
 from homework_04.jsonplaceholder_requests import get_posts, get_users
 from homework_04.models import async_engine
 from homework_04.models import User, Post, Base, Session
+from typing import List
 
 
 async def create_tables():

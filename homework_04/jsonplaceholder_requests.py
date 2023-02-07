@@ -15,7 +15,7 @@ async def get_users():
 
 
 async def get_posts():
-    async with aiohttp.ClientSession() as session:
+    async with ClientSession() as session:
         async with session.get(POSTS_DATA_URL) as response:
             print("Status:", response.status)
             print("Content-type:", response.headers['content-type'])

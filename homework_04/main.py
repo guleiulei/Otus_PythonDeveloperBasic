@@ -14,7 +14,7 @@ async def create_tables():
 async def fetch_users() -> List[User]:
     users = []
     for user in await get_users():
-        user_ = User(id=user['id'], name=user['name'], username=user['username'], email=user['mail'])
+        user_ = User(id=user['id'], name=user['name'], username=user['username'], email=user['email'])
         users.append(user_)
     return users
 

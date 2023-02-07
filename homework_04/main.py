@@ -14,7 +14,8 @@ async def create_tables():
 async def create_users(users_data):
     users_list = []
     for user in users_data:
-        users_list.append(User(id=user['id'], name=user['name'], username=user['username'], email=user['email']))
+        user = User(id=user['id'], name=user['name'], username=user['username'], email=user['email'])
+        users_list.append(user)
     async with async_session() as session:
         async with session.begin():
             session.add_all(users_list)
@@ -23,7 +24,8 @@ async def create_users(users_data):
 async def create_posts(posts_data):
     posts_list = []
     for post in posts_data:
-        posts_list.append(Post(id=post['id'], title=post['title'], user_id=post['userId'], body=post['body']))
+        post = Post(id=post['id'], title=post['title'], user_id=post['userId'], body=post['body'])
+        posts_list.append(post)
     async with async_session() as session:
         async with session.begin():
             session.add_all(posts_list)

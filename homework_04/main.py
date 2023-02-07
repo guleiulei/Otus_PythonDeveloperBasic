@@ -1,5 +1,5 @@
 import asyncio
-from homework_04.jsonplaceholder_requests import get_posts, get_users
+from homework_04.jsonplaceholder_requests import fetch_users_data, fetch_posts_data
 from homework_04.models import async_engine
 from homework_04.models import User, Post, Base, Session, async_session
 from typing import List
@@ -31,27 +31,12 @@ async def create_posts(posts_data):
             session.add_all(posts_list)
 
 
-async def fetch_users() -> List[User]:
-    users_data = []
-    for user in await get_users():
-        user = User(id=user['id'], name=user['name'], username=user['username'], email=user['email'])
-        users_data.append(user)
-    return users_data
-
-
-async def fetch_posts() -> List[Post]:
-    posts_data = []
-    for post in await get_posts():
-        if 'user_id' in post:
-            post = Post(id=post['id'], user_id=post['user_id'], title=post['title'], body=post['body'])
-            posts_data.append(post)
-    return posts_data
 
 
 async def add_users():
     users_data, posts_data = await asyncio.gather(
-        fetch_users(),
-        fetch_posts(),
+        fetch_users_data(),
+        fetch_posts_data(),
     )
     async with Session() as session:
         async with session.begin():
@@ -61,7 +46,7 @@ async def add_users():
 async def async_main():
     users_data: List[dict]
     posts_data: List[dict]
-    users_data, posts_data = await asyncio.gather(fetch_users(), fetch_posts())
+    users_data, posts_data = await asyncio.gather(fetch_users_data(), fetch_posts_data())
     await create_tables()
     await create_users(users_data)
     await create_posts(posts_data)
@@ -73,4 +58,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-

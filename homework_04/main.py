@@ -36,7 +36,7 @@ async def add_users():
 
 async with Session() as session:
     async with session.begin():
-        session.ass_all(users + posts)
+        session.add_all(users + posts)
 
 
 async def async_main():

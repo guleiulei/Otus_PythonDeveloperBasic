@@ -28,30 +28,31 @@ class Base:
         return str(self)
 
 
-class User(Base):
-    name = Column(String, nullable=False)
-    username = Column(String, nullable=False, unique=True)
-    email = Column(String, nullable=False)
+Base = declarative_base(bind=async_engine, cls=Base)
 
-    posts = relationship('Post', back_populates='user', uselist=True)
+
+class User(Base):
+    name = Column(String(50), unique=True)
+    username = Column(String(20), unique=True)
+    email = Column(String(200), unique=True)
+
+    posts = relationship("Post", back_populates="user")
 
     def __str__(self):
         return f"User(id={self.id}, username={self.username!r})"
 
 
 class Post(Base):
-    title = Column(String, nullable=False)
-    body = Column(Text, nullable=False)
-    user_id = Column(Integer, ForeignKey(User.id), nullable=False)
+    user_id = Column(Integer, ForeignKey(User.id), nullable=False, unique=False)
+    title = Column(String(200), unique=True)
+    body = Column(Text, nullable=False, default="")
 
-    user = relationship('User', back_populates='posts', uselist=False)
+    user = relationship("User", back_populates="posts")
 
     def __str__(self):
         return f"Post(id={self.id}, title={self.title!r}, body={self.body})"
 
 
-Base = declarative_base(bind=async_engine, cls=Base)
 Session = sessionmaker(async_engine, class_=AsyncSession, expire_on_commit=False)
 
-# def base():
-#    return None
+

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>
+        {% block title %}
+            Time tracker!
+        {% endblock %}
+    </title>
+</head>
+<body>
+<ul>
+    <li>
+    <a href="{% url 'main_page' %}"> Главная </a>
+    </li>
+    <li>
+        <a href="{% url 'task-list' %}">Список задач</a>
+    </li>
+        <li>
+        <a href="{% url 'epic-list' %}">Список эпиков</a>
+    </li>
+</ul>
+{% block content %}
+{% endblock %}
+</body>
+</html>

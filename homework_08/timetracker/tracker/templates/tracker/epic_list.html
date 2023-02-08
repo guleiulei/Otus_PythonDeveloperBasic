@@ -1,0 +1,12 @@
+{% extends 'root.html' %}
+
+{% block content %}
+<h1> Список эпиков:</h1>
+<ul>
+    {% for epic in object_list %}
+    <li>
+         {{epic.epic_name}}
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}

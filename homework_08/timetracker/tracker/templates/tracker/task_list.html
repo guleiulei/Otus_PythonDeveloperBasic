@@ -1,0 +1,12 @@
+{% extends 'root.html' %}
+
+{% block content %}
+<h1> Список задач:</h1>
+<ul>
+    {% for task in object_list %}
+    <li>
+        <a href="{% url 'task' pk=task.pk %}" > {{task.epic.epic_name}}: {{task.task_name}} - {{task.hours}} ч. </a>
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}
